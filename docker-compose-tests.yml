@@ -1,0 +1,20 @@
+services:
+  event_management_postgres:
+    image: postgres
+    container_name: event_management_postgres
+    restart: always
+    ports:
+      - 3254:5432
+    env_file:
+      - .env.test
+
+
+  event_management_app:
+    container_name: event_management_app
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - event_management_postgres
+    env_file:
+      - .env.test
