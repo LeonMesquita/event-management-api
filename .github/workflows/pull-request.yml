@@ -13,6 +13,7 @@ jobs:
           envkey_POSTGRES_USER: "postgres"
           envkey_POSTGRES_PASSWORD: "postgres"
           envkey_POSTGRES_DB: "event_management_db_test"
+          envkey_JWT_SECRET: "12345"
           file_name: ".env.test"
       - name: Run E2E tests
         run: docker-compose -f docker-compose-tests.yml run event_management_app npm run test:e2e
