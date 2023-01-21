@@ -22,10 +22,17 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/auth/sign-up (POST)', () => {
+  it('/auth/sign-up (POST) Should create a new user', async () => {
     return request(app.getHttpServer())
       .post('/auth/sign-up')
       .send(mockedUser)
       .expect(201);
+  });
+
+  it('/auth/sign-up (POST) Should throw error if email already exists', async () => {
+    return request(app.getHttpServer())
+      .post('/auth/sign-up')
+      .send(mockedUser)
+      .expect(409);
   });
 });
