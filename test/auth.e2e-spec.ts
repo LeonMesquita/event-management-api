@@ -3,13 +3,12 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
-import { User } from 'src/auth/entities/user.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   const mockedUser: CreateUserDto = {
-    name: 'any_name',
     email: 'any_email@gmail.com',
+    name: 'any_name',
     password: 'any_password',
   };
 
