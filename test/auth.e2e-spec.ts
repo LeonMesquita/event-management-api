@@ -44,4 +44,24 @@ describe('AppController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('/auth/sign-in (POST) Should throw error if email is incorrect', async () => {
+    return request(app.getHttpServer())
+      .post('/auth/sign-in')
+      .send({
+        email: 'incorrect_email@gmail.com',
+        password: mockedUser.password,
+      })
+      .expect(401);
+  });
+
+  it('/auth/sign-in (POST) Should throw error if email is incorrect', async () => {
+    return request(app.getHttpServer())
+      .post('/auth/sign-in')
+      .send({
+        email: mockedUser.email,
+        password: 'incorrect_password',
+      })
+      .expect(401);
+  });
 });
