@@ -12,7 +12,9 @@ export class AuthService {
     const findUser: User = await this.prisma.user.findUnique({
       where: { email: createUserDto.email },
     });
-    if (findUser) return new ConflictException('This email already exists');
+    if (findUser) {
+      throw new ConflictException('This email already exists');
+    }
     const data = {
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, 10),
