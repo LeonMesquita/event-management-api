@@ -2,9 +2,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { CreateUserDto } from 'src/auth/dto/create-user.dto';
+import { User } from 'src/auth/entities/user.entity';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  const mockedUser: CreateUserDto = {
+    name: 'any_name',
+    email: 'any_email@gmail.com',
+    password: 'any_password',
+  };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -15,10 +22,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/auth/sign-up (POST)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .post('/auth/sign-up')
+      .send(mockedUser)
+      .expect(201);
   });
 });
