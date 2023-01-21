@@ -34,4 +34,14 @@ describe('AppController (e2e)', () => {
       .send(mockedUser)
       .expect(409);
   });
+
+  it('/auth/sign-in (POST) Should login user', async () => {
+    return request(app.getHttpServer())
+      .post('/auth/sign-in')
+      .send({
+        email: mockedUser.email,
+        password: mockedUser.password,
+      })
+      .expect(200);
+  });
 });
