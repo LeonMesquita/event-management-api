@@ -20,13 +20,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "dotenv -e .env.test -- jest --config ./test/jest-e2e.json"
+    "test:e2e": "dotenv -e .env.test -- prisma migrate reset --force --skip-seed && dotenv -e .env.test -- jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.1",
-    "@nestjs/mapped-types": "^1.2.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.9.0",
