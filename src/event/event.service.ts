@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { searchCEP } from 'src/utils/search-address.util';
@@ -57,8 +58,13 @@ export class EventService {
     return `This action updates a #${id} event`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  async remove(id: number, user_id: number) {
+    const event = await this.findOne(id);
+    if (event.user_id !== user_id)
+      throw new UnauthorizedException(
+        'This user is not authorized to delete this event',
+      );
+    return await this.prisma.event.delete({ where: { id } });
   }
 
   private async createAddress(data: Address): Promise<Address> {

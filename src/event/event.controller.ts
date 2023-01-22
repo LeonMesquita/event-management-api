@@ -41,7 +41,8 @@ export class EventController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.eventService.remove(+id);
+  remove(@Param('id') id: string, @Req() req: any) {
+    const userId: number = req.user.id;
+    return this.eventService.remove(+id, userId);
   }
 }
