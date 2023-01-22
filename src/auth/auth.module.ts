@@ -14,7 +14,7 @@ config();
     PassportModule,
     JwtModule.register({
       privateKey: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '50000s' },
     }),
   ],
   controllers: [AuthController],
