@@ -15,5 +15,37 @@ model User {
   email String @unique
   password String
   name String
+  createdAt  DateTime?   @default(now())
+  events Event[]
   @@map("users")
+}
+
+model Address {
+  id    Int     @default(autoincrement()) @id
+  zip_code String @unique
+  street String
+  district String
+  state String
+  city String
+  complement String?
+  createdAt  DateTime?   @default(now())
+  events Event[]
+  @@map("addresses")
+}
+
+model Event {
+  id    Int     @default(autoincrement()) @id
+  event_name String
+  responsible_name String
+  date String
+  time String
+  email String @unique
+  phone_number String
+  event_image String
+  user_id Int
+  address_id Int
+  createdAt  DateTime?   @default(now())
+  user User @relation(fields: [user_id], references: [id])
+  address Address @relation(fields: [address_id], references: [id])
+  @@map("events")
 }
