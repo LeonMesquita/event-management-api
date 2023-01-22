@@ -54,8 +54,16 @@ export class EventService {
     return await this.prisma.event.findUnique({ where: { email } });
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, user_id: number, data: UpdateEventDto) {
+    const event = await this.findOne(id);
+    if (event.user_id !== user_id)
+      throw new UnauthorizedException(
+        'This user is not authorized to update this event',
+      );
+    return await this.prisma.event.update({
+      where: { id },
+      data,
+    });
   }
 
   async remove(id: number, user_id: number) {
