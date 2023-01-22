@@ -36,8 +36,13 @@ export class EventController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventService.update(+id, updateEventDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+    @Req() req: any,
+  ) {
+    const userId: number = req.user.id;
+    return this.eventService.update(+id, userId, updateEventDto);
   }
 
   @Delete(':id')
