@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { searchCEP } from 'src/utils/search-address.util';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -34,12 +38,15 @@ export class EventService {
     return createdEvent;
   }
 
-  findAll() {
-    return `This action returns all event`;
+  async findAll(): Promise<Event[]> {
+    return await this.prisma.event.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  async findOne(id: number): Promise<Event> {
+    const event = await this.prisma.event.findUnique({ where: { id } });
+    if (!event)
+      throw new NotFoundException(`The event with id ${id} was not found`);
+    return event;
   }
 
   async findOneByEmail(email: string) {
