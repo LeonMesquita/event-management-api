@@ -13,7 +13,9 @@ import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('event')
 @UseGuards(AuthGuard('jwt'))
 @Controller('event')
 export class EventController {
