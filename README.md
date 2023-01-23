@@ -96,6 +96,13 @@ $ npm run start:prod
 ## Rodando os testes na máquina local
 
 ```bash
+# Criar um arquivo .env.test na raiz e inserir as variáveis de ambiente necessárias. Exemplo:
+
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/event_management_db_test
+
+JWT_SECRET=12345
+
+
 # unit tests
 $ npm run test
 
