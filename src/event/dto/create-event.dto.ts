@@ -1,6 +1,5 @@
 import {
   IsEmail,
-  IsNumber,
   IsNumberString,
   IsString,
   Matches,
