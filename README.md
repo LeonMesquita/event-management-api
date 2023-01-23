@@ -10,12 +10,18 @@ API de gerenciamento de eventos desenvolvida em [Nest](https://github.com/nestjs
 
 ## URL da API
 ```bash
+# Via deploy AWS
+http://ec2-18-212-7-242.compute-1.amazonaws.com/api/
+
 # Via localhost
 http://localhost:5000/api/
 ```
 
 ## Documentação Swagger
 ```bash
+# Via deploy AWS
+http://ec2-18-212-7-242.compute-1.amazonaws.com/api/docs
+
 # Via localhost
 http://localhost:5000/api/docs
 ```
