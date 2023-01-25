@@ -40,11 +40,20 @@ export class EventService {
   }
 
   async findAll(): Promise<Event[]> {
-    return await this.prisma.event.findMany();
+    return await this.prisma.event.findMany({
+      include: {
+        address: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<Event> {
-    const event = await this.prisma.event.findUnique({ where: { id } });
+    const event = await this.prisma.event.findUnique({
+      where: { id },
+      include: {
+        address: true,
+      },
+    });
     if (!event)
       throw new NotFoundException(`The event with id ${id} was not found`);
     return event;
